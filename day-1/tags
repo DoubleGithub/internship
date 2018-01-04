@@ -1,0 +1,53 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.6	//
+BUFSIZ	/usr/include/stdio.h	105;"	d
+EOF	/usr/include/stdio.h	112;"	d
+FILE	/usr/include/stdio.h	/^typedef struct _IO_FILE FILE;$/;"	t	typeref:struct:_IO_FILE
+P_tmpdir	/usr/include/stdio.h	125;"	d
+SEEK_CUR	/usr/include/stdio.h	119;"	d
+SEEK_END	/usr/include/stdio.h	120;"	d
+SEEK_SET	/usr/include/stdio.h	118;"	d
+Student	file_struct_operation.c	/^typedef struct Student$/;"	s	file:
+_IOFBF	/usr/include/stdio.h	98;"	d
+_IOLBF	/usr/include/stdio.h	99;"	d
+_IONBF	/usr/include/stdio.h	100;"	d
+_STDIO_H	/usr/include/stdio.h	27;"	d
+_STDIO_USES_IOSTREAM	/usr/include/stdio.h	70;"	d
+_VA_LIST_DEFINED	/usr/include/stdio.h	78;"	d
+__FILE	/usr/include/stdio.h	/^typedef struct _IO_FILE __FILE;$/;"	t	typeref:struct:_IO_FILE
+__FILE_defined	/usr/include/stdio.h	54;"	d
+____FILE_defined	/usr/include/stdio.h	64;"	d
+__attribute_malloc__	/usr/include/stdio.h	/^     __THROW __attribute_malloc__;$/;"	v
+__need_FILE	/usr/include/stdio.h	37;"	d
+__need_FILE	/usr/include/stdio.h	56;"	d
+__need_NULL	/usr/include/stdio.h	33;"	d
+__need___FILE	/usr/include/stdio.h	38;"	d
+__need___FILE	/usr/include/stdio.h	66;"	d
+__need_getopt	/usr/include/stdio.h	828;"	d
+__need_size_t	/usr/include/stdio.h	32;"	d
+__wur	/usr/include/stdio.h	/^extern int feof (FILE *__stream) __THROW __wur;$/;"	v
+__wur	/usr/include/stdio.h	/^extern int feof_unlocked (FILE *__stream) __THROW __wur;$/;"	v
+__wur	/usr/include/stdio.h	/^extern int ferror (FILE *__stream) __THROW __wur;$/;"	v
+__wur	/usr/include/stdio.h	/^extern int ferror_unlocked (FILE *__stream) __THROW __wur;$/;"	v
+__wur	/usr/include/stdio.h	/^extern int fileno (FILE *__stream) __THROW __wur;$/;"	v
+__wur	/usr/include/stdio.h	/^extern int fileno_unlocked (FILE *__stream) __THROW __wur;$/;"	v
+__wur	/usr/include/stdio.h	/^extern int ftrylockfile (FILE *__stream) __THROW __wur;$/;"	v
+fpos64_t	/usr/include/stdio.h	/^typedef _G_fpos64_t fpos64_t;$/;"	t
+fpos_t	/usr/include/stdio.h	/^typedef _G_fpos_t fpos_t;$/;"	t
+getc	/usr/include/stdio.h	453;"	d
+initial_struct	file_struct_operation.c	/^void initial_struct(student *pstu,int count)$/;"	f
+main	file_struct_operation.c	/^int main(int argc,char *argv[])$/;"	f
+name	file_struct_operation.c	/^    char name[20];$/;"	m	struct:Student	file:
+num	file_struct_operation.c	/^    int num;$/;"	m	struct:Student	file:
+output_struct	file_struct_operation.c	/^void output_struct(student *pstu,int count)$/;"	f
+putc	/usr/include/stdio.h	495;"	d
+score	file_struct_operation.c	/^    float score;$/;"	m	struct:Student	file:
+stderr	/usr/include/stdio.h	149;"	d
+stdin	/usr/include/stdio.h	147;"	d
+stdout	/usr/include/stdio.h	148;"	d
+student	file_struct_operation.c	/^} student;$/;"	t	typeref:struct:Student	file:
+va_list	/usr/include/stdio.h	/^typedef _G_va_list va_list;$/;"	t
