@@ -10,7 +10,8 @@ int main(int argc,char *argv[])
     assert(fpr!=NULL && fpw!=NULL);
     while(fgets(string,20,fpr)!=NULL)
     {
-        fputs(string,stdout);
+        //fputs(string,stdout);
+        fputs(string,fpw);
     }
     fclose(fpr);
     fclose(fpw);
