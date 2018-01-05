@@ -14,7 +14,8 @@ gcc 编译过程
 							未初始化的全局变量和静态变量存放在另一块相邻的区域，程序结束后由系统释放。
 	文字常量区	常量字符串，程序结束后由系统释放。
 	程序代码区	存放函数体的二进制代码。
-	
+
+cd - 返回上一次路径
 /proc
 	正在运行的进程编号
 	
@@ -71,15 +72,25 @@ VIM
 		#G	跳转到#行
 		J	合并两行
 		dd	剪切当前光标行
+            ndd n 为数字。剪切光标所在的行向下n行，例如 20dd 则是剪切 20行 (常用)
+            d1G 剪切光标所在到第一行的所有数据
+            dG  剪切光标所在到最后一行的所有数据
 			dw	剪切当前光标所在单词
+            d$  剪切游标所在处，到该行行尾的所有字符
+            d0  剪切游标所在处 ，到该行行首的所有字符
 		yy	复制
-			yw	当前光标所在单词
-			y$
-			y^
+			nyw	当前光标所在单词后的n个单词
+            yy  复制游标所在癿那一行(常用)
+            y1G 复制光标所在列到第一列癿所有数据
+            yG  复制光标所在列到最后一列癿所有数据
+            y0  复制光标所在的那个字符到该行行首癿所有数据
+            y$  复制光标所在的那个字符到该行行尾癿所有数据
 		p	黏贴
 		u	撤销 单步
 		U	撤销 所有操作
 		ctrl + r 相当于ctrl + y
+		ctrl + ] 跳转函数位置  ctrl + t	返回跳转位置----先用ctags建立tag文件
+		ctrl + n ctrl + p 显示补全列表--先用ctags建立tag文件
 	末行模式：
 		i	光标处插入
 		o	在当前行下面插入新行，并进入插入模式
@@ -87,6 +98,9 @@ VIM
 		:set nu
 		:set nonu
 		:w xx 另存为
+		:set paste	设置粘贴
+		:set nopaste	取消设置粘贴
+		:nohl	清除/ ? 查找后的高亮着色
 		
 	打开二进制文件
 		vim -b xx
@@ -106,7 +120,7 @@ C语言
 	文件
 		fputc(ch,stdout);//输出到屏幕 
 
-内核开发
+内核驱动开发
 	1、内核核心
 		进程管理
 		内存管理
@@ -134,10 +148,52 @@ C语言
 			__init 限定加载时调用
 			__exit	限定卸载时调用
 	开发步骤
-		主设备号 12bit 1-255
-			
-		次设备号 20bit 
-		
+		基本步骤
+			1、确定主设备号和次设备号
+			2、实现字符驱动程序
+				实现file_operations结构题
+				实现初始化函数，注册字符设备
+				实现销毁函数，释放字符设备
+			3、创建设备文件节点
+
+		主设备号是内核识别一个设备的标识
+			整数（占12bits），范围从0到4095，通常使用1-255
+		次设备号由内核使用，用于正确确定设备文件所指向的设备
+			整数（占20bits），范围从0到1048575，通常使用1-255
+		设备编号的内部表达
+			dev_t类型(32位)
+				用来保存设备编号 高12位为主设备号，低20位为次设备号
+			从dev_t获得主次设备号
+				MAJOR(dev_t)	主
+				MINOR(dev_t)	次
+			将主次设备号转换为dev_t类型
+				MKDEV(int major,int minor);
+		分配主设备号
+			手动分配
+				#include <linux/fs.h>
+				int register_chrdev_region(dev_t first,unsigned int count,char *name)
+			动态分配
+				#include <linux/fs.h>
+				int alloc_chrdev_region(dev_t *dev,unsigned int	firstminor,unsigned int count,char *name);
+			释放设备号
+				void unregister_chrdev_region(dev_t first,unsigned int count);
+		实现字符驱动
+			cdev结构体
+				struct cdev
+				{
+					struct kobject kobj;	//内嵌的kobject对象
+					struct module *owner;	//所属模块
+					struct file_operations *ops;	//文件操作结构体
+					struct list_head list;	
+					dev_t dev;				//设备号
+					unsigned int count;
+				}
+			操作cdev的函数
+				void cdev_init( struct cdev *, struc t file_operations *);
+				struct cdev *cdev_alloc(void);
+				int cdev_add(st ruct cdev *, dev_t, unsigned);
+				void cdev_del(struct cdev *);
+
 		file_operations 
 			应用程序调用fopen打开设备时，内核会将fopen映射到file_operations里面的open函数指针处
 		

@@ -1,0 +1,1 @@
+cmd_/root/Desktop/internship/day-2/hello/hello.ko := arm-linux-ld -EL -r  -T /usr/src/kernels/linux-3.5/scripts/module-common.lds --build-id  -o /root/Desktop/internship/day-2/hello/hello.ko /root/Desktop/internship/day-2/hello/hello.o /root/Desktop/internship/day-2/hello/hello.mod.o
