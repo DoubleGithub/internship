@@ -195,5 +195,35 @@ C语言
 				void cdev_del(struct cdev *);
 
 		file_operations 
-			应用程序调用fopen打开设备时，内核会将fopen映射到file_operations里面的open函数指针处
+			根据硬件设备的特点，实现某些函数
+			1、应用程序调用fopen打开设备时，内核会将fopen映射到file_operations里面的open函数指针处
+			2、主要成员函数
+				unlocked_ioctl //传递控制参数
+				open
+				release
+				read
+				write	被应用程序调用写
+			3、用户空间和内核空间的数据拷贝过程
+				unsigned long copy_from_user(void *to,  const void __user *from,unsigned long count) ;用户到内核，在write内
+				unsigned long copy_to_user(void __user *to,  const void *from,unsigned long count );内核到用户，在read内
+				如果要复制的内存是简单类型，如char、int、long 等，
+					put_user()和get_user()
+		用户程序的调用函数
+			write
+			open
+			read
+			ioctl
+
+				
+				
+	简单的内核调用步骤
+		insmod xx.ko
+		rm -rf /dev/xx
+		mknod /dev/xx c major minor //创建设备节点
+		./xx /dev/xx
+		rmmod xx.kb
 		
+中断
+	软中断
+	硬中断
+	DMA
