@@ -1,0 +1,2 @@
+实现tab补全变量名
+	yum install bash-completion
