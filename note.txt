@@ -197,7 +197,8 @@ C语言
 		file_operations 
 			根据硬件设备的特点，实现某些函数
 			1、应用程序调用fopen打开设备时，内核会将fopen映射到file_operations里面的open函数指针处
-			2、主要成员函数
+			2、主要成员
+				owner
 				unlocked_ioctl //传递控制参数
 				open
 				release
@@ -222,7 +223,33 @@ C语言
 		mknod /dev/xx c major minor //创建设备节点
 		./xx /dev/xx
 		rmmod xx.kb
+	地址映射
+		ioremap
+		地址划分
+			0-3G user space virtual address
+			3G-4G kernel space virtual address
+		cpu->mmu->memory
+		把物理地址映射为虚拟地址
+	设置地址时，先取地址，在原来的地址上&设置值
+	ioread32
+	iwrite32
+	
+	
+阻塞型
+	阻塞型
 		
+	非阻塞型
+	休眠
+		安全的进入休眠状态
+			(原子上下文--某段不允许中断的代码)
+	等待队列
+		实现阻塞进程的唤醒
+		实现内核中的异步事件通知机制
+			队列的数据结构
+			系统的调度机制
+		同步系统资源的访问
+		
+	信号量 机制？？？互斥锁
 中断
 	软中断
 	硬中断
