@@ -118,7 +118,7 @@ void key_interrupt_handle(int irq,void *dev_id,struct pt_regs *pt )
 	printk("%s,pin=%d\n",__FUNCTION__,key_value[pload->pin]);
 	key_value[pload->pin]=1;
 	key_flag=1;
-	//!!!!!!!!!!!!!!
+	//唤醒等待队列中的进程
 	wake_up_interruptible((void *)&key_wait_queue);
 
 }

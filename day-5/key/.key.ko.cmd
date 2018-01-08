@@ -1,1 +1,0 @@
-cmd_/root/Desktop/internship/day-5/key/key.ko := arm-linux-ld -EL -r  -T /usr/src/kernels/linux-3.5/scripts/module-common.lds --build-id  -o /root/Desktop/internship/day-5/key/key.ko /root/Desktop/internship/day-5/key/key.o /root/Desktop/internship/day-5/key/key.mod.o
