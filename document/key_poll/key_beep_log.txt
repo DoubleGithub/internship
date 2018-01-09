@@ -1,0 +1,166 @@
+[root@wbyq internship]#insmod beep.ko 
+[ 4714.290000] beep major=250
+[ 4714.290000] hello_init
+[root@wbyq internship]#insmod key.ko 
+[ 4720.720000] my_key_init
+[ 4720.720000] key_major=249
+[ 4720.720000] key0 interrupt register retur = 0
+[ 4720.720000] key1 interrupt register retur = 0
+[ 4720.720000] key2 interrupt register retur = 0
+[ 4720.720000] key3 interrupt register retur = 0
+[root@wbyq internship]#mknod /dev/beep c 250 0
+[root@wbyq internship]#mknod /dev/key c 249 0
+[root@wbyq internship]#chmod 777 key_app 
+[root@wbyq internship]#./key_app /dev/key /dev/beep 
+[ 4794.150000] key_open
+[ 4794.150000] beep_open
+[ 4800.380000] key_interrupt_handle,pin=0
+[ 4800.380000] irq event 442: bogus return value bf0207f4
+[ 4800.380000] [<c001aa44>] (unwind_backtrace+0x0/0xf0) from [<c0091604>] (__report_bad_irq+0x24/0xc4)
+[ 4800.380000] [<c0091604>] (__report_bad_irq+0x24/0xc4) from [<c008f750>] (handle_irq_event_percpu+0xd8/0x2ac)
+[ 4800.380000] [<c008f750>] (handle_irq_event_percpu+0xd8/0x2ac) from [<c008f960>] (handle_irq_event+0x3c/0x5c)
+[ 4800.380000] [<c008f960>] (handle_irq_event+0x3c/0x5c) from [<c0091da8>] (handle_edge_irq+0xb8/0x18c)
+[ 4800.380000] [<c0091da8>] (handle_edge_irq+0xb8/0x18c) from [<c008ef50>] (generic_handle_irq+0x2c/0x40)
+[ 4800.380000] [<c008ef50>] (generic_handle_irq+0x2c/0x40) from [<c0024824>] (exynos_irq_demux_eint16_31+0x8c/0xf4)
+[ 4800.380000] [<c0024824>] (exynos_irq_demux_eint16_31+0x8c/0xf4) from [<c008ef50>] (generic_handle_irq+0x2c/0x40)
+[ 4800.380000] [<c008ef50>] (generic_handle_irq+0x2c/0x40) from [<c00148f8>] (handle_IRQ+0x4c/0xac)
+[ 4800.380000] [<c00148f8>] (handle_IRQ+0x4c/0xac) from [<c00084e8>] (gic_handle_irq+0x34/0x68)
+[ 4800.380000] [<c00084e8>] (gic_handle_irq+0x34/0x68) from [<c0013600>] (__irq_svc+0x40/0x70)
+[ 4800.380000] Exception stack(0xc08c9f08 to 0xc08c9f50)
+[ 4800.380000] 9f00:                   c08c9f50 0000045d ad37c21f 0000045d ac2c4b6b 0000045d
+[ 4800.380000] 9f20: c1a00358 c08c9f50 00000000 c08f863c 00000000 c097a9ac 3b9aca00 c08c9f50
+[ 4800.380000] 9f40: c0072840 c04621a4 80000013 ffffffff
+[ 4800.380000] [<c0013600>] (__irq_svc+0x40/0x70) from [<c04621a4>] (cpuidle_wrap_enter+0x4c/0xa0)
+[ 4800.380000] [<c04621a4>] (cpuidle_wrap_enter+0x4c/0xa0) from [<c0461dcc>] (cpuidle_idle_call+0xdc/0x360)
+[ 4800.380000] [<c0461dcc>] (cpuidle_idle_call+0xdc/0x360) from [<c0014f84>] (cpu_idle+0xc8/0x11c)
+[ 4800.380000] [<c0014f84>] (cpu_idle+0xc8/0x11c) from [<c08907cc>] (start_kernel+0x2d0/0x324)
+[ 4800.380000] handlers:
+[ 4800.380000] [<bf02006c>] key_interrupt_handle [key]
+[ 4800.530000] key_read
+[ 4800.535000] beep_unlocked_ioctl
+[ 4800.535000] 1
+key0 is pushed down
+[ 4801.535000] beep_unlocked_ioctl
+[ 4801.535000] 0
+[ 4802.540000] key_read
+[ 4802.540000] kernel will be sleep
+[ 4806.045000] key_interrupt_handle,pin=0
+[ 4806.045000] irq event 443: bogus return value bf0207f4
+[ 4806.045000] [<c001aa44>] (unwind_backtrace+0x0/0xf0) from [<c0091604>] (__report_bad_irq+0x24/0xc4)
+[ 4806.045000] [<c0091604>] (__report_bad_irq+0x24/0xc4) from [<c008f750>] (handle_irq_event_percpu+0xd8/0x2ac)
+[ 4806.045000] [<c008f750>] (handle_irq_event_percpu+0xd8/0x2ac) from [<c008f960>] (handle_irq_event+0x3c/0x5c)
+[ 4806.045000] [<c008f960>] (handle_irq_event+0x3c/0x5c) from [<c0091da8>] (handle_edge_irq+0xb8/0x18c)
+[ 4806.045000] [<c0091da8>] (handle_edge_irq+0xb8/0x18c) from [<c008ef50>] (generic_handle_irq+0x2c/0x40)
+[ 4806.045000] [<c008ef50>] (generic_handle_irq+0x2c/0x40) from [<c0024824>] (exynos_irq_demux_eint16_31+0x8c/0xf4)
+[ 4806.045000] [<c0024824>] (exynos_irq_demux_eint16_31+0x8c/0xf4) from [<c008ef50>] (generic_handle_irq+0x2c/0x40)
+[ 4806.045000] [<c008ef50>] (generic_handle_irq+0x2c/0x40) from [<c00148f8>] (handle_IRQ+0x4c/0xac)
+[ 4806.045000] [<c00148f8>] (handle_IRQ+0x4c/0xac) from [<c00084e8>] (gic_handle_irq+0x34/0x68)
+[ 4806.045000] [<c00084e8>] (gic_handle_irq+0x34/0x68) from [<c0013600>] (__irq_svc+0x40/0x70)
+[ 4806.045000] Exception stack(0xc08c9f08 to 0xc08c9f50)
+[ 4806.045000] 9f00:                   c08c9f50 0000045e fea701c0 0000045e fe692459 0000045e
+[ 4806.045000] 9f20: c1a00358 c08c9f50 00000000 c08f863c 00000000 c097a9ac 3b9aca00 c08c9f50
+[ 4806.045000] 9f40: c0072840 c04621a4 80000013 ffffffff
+[ 4806.045000] [<c0013600>] (__irq_svc+0x40/0x70) from [<c04621a4>] (cpuidle_wrap_enter+0x4c/0xa0)
+[ 4806.045000] [<c04621a4>] (cpuidle_wrap_enter+0x4c/0xa0) from [<c0461dcc>] (cpuidle_idle_call+0xdc/0x360)
+[ 4806.045000] [<c0461dcc>] (cpuidle_idle_call+0xdc/0x360) from [<c0014f84>] (cpu_idle+0xc8/0x11c)
+[ 4806.045000] [<c0014f84>] (cpu_idle+0xc8/0x11c) from [<c08907cc>] (start_kernel+0x2d0/0x324)
+[ 4806.045000] handlers:
+[ 4806.045000] [<bf02006c>] key_interrupt_handle [key]
+[ 4806.190000] kernel will be wakeup
+[ 4806.195000] key_read
+[ 4806.195000] beep_unlocked_ioctl
+[ 4806.200000] 1
+key1 is pushed down
+[ 4807.200000] beep_unlocked_ioctl
+[ 4807.200000] 0
+[ 4808.200000] beep_unlocked_ioctl
+[ 4808.200000] 1
+[ 4809.200000] beep_unlocked_ioctl
+[ 4809.200000] 0
+[ 4810.205000] key_read
+[ 4810.205000] kernel will be sleep
+[ 4812.120000] key_interrupt_handle,pin=0
+[ 4812.120000] irq event 444: bogus return value bf0207f4
+[ 4812.120000] [<c001aa44>] (unwind_backtrace+0x0/0xf0) from [<c0091604>] (__report_bad_irq+0x24/0xc4)
+[ 4812.120000] [<c0091604>] (__report_bad_irq+0x24/0xc4) from [<c008f750>] (handle_irq_event_percpu+0xd8/0x2ac)
+[ 4812.120000] [<c008f750>] (handle_irq_event_percpu+0xd8/0x2ac) from [<c008f960>] (handle_irq_event+0x3c/0x5c)
+[ 4812.120000] [<c008f960>] (handle_irq_event+0x3c/0x5c) from [<c0091da8>] (handle_edge_irq+0xb8/0x18c)
+[ 4812.120000] [<c0091da8>] (handle_edge_irq+0xb8/0x18c) from [<c008ef50>] (generic_handle_irq+0x2c/0x40)
+[ 4812.120000] [<c008ef50>] (generic_handle_irq+0x2c/0x40) from [<c0024824>] (exynos_irq_demux_eint16_31+0x8c/0xf4)
+[ 4812.120000] [<c0024824>] (exynos_irq_demux_eint16_31+0x8c/0xf4) from [<c008ef50>] (generic_handle_irq+0x2c/0x40)
+[ 4812.120000] [<c008ef50>] (generic_handle_irq+0x2c/0x40) from [<c00148f8>] (handle_IRQ+0x4c/0xac)
+[ 4812.120000] [<c00148f8>] (handle_IRQ+0x4c/0xac) from [<c00084e8>] (gic_handle_irq+0x34/0x68)
+[ 4812.120000] [<c00084e8>] (gic_handle_irq+0x34/0x68) from [<c0013600>] (__irq_svc+0x40/0x70)
+[ 4812.120000] Exception stack(0xc08c9f08 to 0xc08c9f50)
+[ 4812.120000] 9f00:                   c08c9f50 00000460 68c1e80e 00000460 68c1b6e7 00000460
+[ 4812.120000] 9f20: c1a00358 c08c9f50 00000000 c08f863c 00000000 c097a9ac 3b9aca00 c08c9f50
+[ 4812.120000] 9f40: c0072840 c04621a4 00000013 ffffffff
+[ 4812.120000] [<c0013600>] (__irq_svc+0x40/0x70) from [<c04621a4>] (cpuidle_wrap_enter+0x4c/0xa0)
+[ 4812.120000] [<c04621a4>] (cpuidle_wrap_enter+0x4c/0xa0) from [<c0461dcc>] (cpuidle_idle_call+0xdc/0x360)
+[ 4812.120000] [<c0461dcc>] (cpuidle_idle_call+0xdc/0x360) from [<c0014f84>] (cpu_idle+0xc8/0x11c)
+[ 4812.120000] [<c0014f84>] (cpu_idle+0xc8/0x11c) from [<c08907cc>] (start_kernel+0x2d0/0x324)
+[ 4812.120000] handlers:
+[ 4812.120000] [<bf02006c>] key_interrupt_handle [key]
+[ 4812.265000] kernel will be wakeup
+[ 4812.270000] key_read
+[ 4812.270000] beep_unlocked_ioctl
+[ 4812.275000] 1
+key2 is pushed down
+[ 4813.275000] beep_unlocked_ioctl
+[ 4813.275000] 0
+[ 4814.275000] beep_unlocked_ioctl
+[ 4814.275000] 1
+[ 4815.275000] beep_unlocked_ioctl
+[ 4815.275000] 0
+[ 4816.275000] beep_unlocked_ioctl
+[ 4816.275000] 1
+[ 4817.275000] beep_unlocked_ioctl
+[ 4817.275000] 0
+[ 4818.275000] key_read
+[ 4818.275000] kernel will be sleep
+[ 4820.385000] key_interrupt_handle,pin=0
+[ 4820.385000] irq event 445: bogus return value bf0207f4
+[ 4820.385000] [<c001aa44>] (unwind_backtrace+0x0/0xf0) from [<c0091604>] (__report_bad_irq+0x24/0xc4)
+[ 4820.385000] [<c0091604>] (__report_bad_irq+0x24/0xc4) from [<c008f750>] (handle_irq_event_percpu+0xd8/0x2ac)
+[ 4820.385000] [<c008f750>] (handle_irq_event_percpu+0xd8/0x2ac) from [<c008f960>] (handle_irq_event+0x3c/0x5c)
+[ 4820.385000] [<c008f960>] (handle_irq_event+0x3c/0x5c) from [<c0091da8>] (handle_edge_irq+0xb8/0x18c)
+[ 4820.385000] [<c0091da8>] (handle_edge_irq+0xb8/0x18c) from [<c008ef50>] (generic_handle_irq+0x2c/0x40)
+[ 4820.385000] [<c008ef50>] (generic_handle_irq+0x2c/0x40) from [<c0024824>] (exynos_irq_demux_eint16_31+0x8c/0xf4)
+[ 4820.385000] [<c0024824>] (exynos_irq_demux_eint16_31+0x8c/0xf4) from [<c008ef50>] (generic_handle_irq+0x2c/0x40)
+[ 4820.385000] [<c008ef50>] (generic_handle_irq+0x2c/0x40) from [<c00148f8>] (handle_IRQ+0x4c/0xac)
+[ 4820.385000] [<c00148f8>] (handle_IRQ+0x4c/0xac) from [<c00084e8>] (gic_handle_irq+0x34/0x68)
+[ 4820.385000] [<c00084e8>] (gic_handle_irq+0x34/0x68) from [<c0013600>] (__irq_svc+0x40/0x70)
+[ 4820.385000] Exception stack(0xc08c9f08 to 0xc08c9f50)
+[ 4820.385000] 9f00:                   c08c9f50 00000462 559fb101 00000462 5482d365 00000462
+[ 4820.385000] 9f20: c1a00358 c08c9f50 00000000 c08f863c 00000000 c097a9ac 3b9aca00 c08c9f50
+[ 4820.385000] 9f40: c0072840 c04621a4 00000013 ffffffff
+[ 4820.385000] [<c0013600>] (__irq_svc+0x40/0x70) from [<c04621a4>] (cpuidle_wrap_enter+0x4c/0xa0)
+[ 4820.385000] [<c04621a4>] (cpuidle_wrap_enter+0x4c/0xa0) from [<c0461dcc>] (cpuidle_idle_call+0xdc/0x360)
+[ 4820.385000] [<c0461dcc>] (cpuidle_idle_call+0xdc/0x360) from [<c0014f84>] (cpu_idle+0xc8/0x11c)
+[ 4820.385000] [<c0014f84>] (cpu_idle+0xc8/0x11c) from [<c08907cc>] (start_kernel+0x2d0/0x324)
+[ 4820.385000] handlers:
+[ 4820.385000] [<bf02006c>] key_interrupt_handle [key]
+[ 4820.535000] kernel will be wakeup
+[ 4820.540000] key_read
+[ 4820.540000] beep_unlocked_ioctl
+[ 4820.545000] 1
+key3 is pushed down
+[ 4821.545000] beep_unlocked_ioctl
+[ 4821.545000] 0
+[ 4822.545000] beep_unlocked_ioctl
+[ 4822.545000] 1
+[ 4823.545000] beep_unlocked_ioctl
+[ 4823.545000] 0
+[ 4824.545000] beep_unlocked_ioctl
+[ 4824.545000] 1
+[ 4825.545000] beep_unlocked_ioctl
+[ 4825.545000] 0
+[ 4826.545000] beep_unlocked_ioctl
+[ 4826.545000] 1
+[ 4827.545000] beep_unlocked_ioctl
+[ 4827.545000] 0
+[ 4828.545000] key_read
+[ 4828.545000] kernel will be sleep
+^C[ 4840.955000] kernel will be wakeup
+[ 4840.955000] key_release
+[ 4840.955000] beep_release

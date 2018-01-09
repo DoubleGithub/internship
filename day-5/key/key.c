@@ -37,11 +37,13 @@ void key_gpx_conf_init(void)
 	unsigned int value=0;
 	address=ioremap(0x11000C60,8);
 	value=ioread32(address);
+	printk("before modify value=0x%x\n",value);
 	for(i=0;i<16;i++)
 	{
 		value|=0x100<<i;//set bit8-bit23 to 1
 	}
 	iowrite32(value,address);
+	printk("after modify value=0x%x\n",value);
 }
 static ssize_t key_read (struct file *fp, char __user *buff, size_t num, loff_t *poff)
 {
@@ -79,7 +81,6 @@ int key_release (struct inode *pnode, struct file *fp)
 	printk("%s\n",__FUNCTION__);
 	return 0;
 }
-//static unsigned int key_poll(struct file)
 static unsigned int key_poll (struct file *fp, struct poll_table_struct *pt)
 {
 	int mask=0;
@@ -112,15 +113,16 @@ void cdev_register(void)
 	cdev_init(&key_cdev,&key_ops);
 	cdev_add(&key_cdev,key_no,1);
 }
-void key_interrupt_handle(int irq,void *dev_id,struct pt_regs *pt )
+irqreturn_t key_interrupt_handle(int irq,void *dev_id )
 {
+	int state = 0;
 	struct key_info *pload=(struct key_info *)dev_id;
-	printk("%s,pin=%d\n",__FUNCTION__,key_value[pload->pin]);
+	printk("%s,pin=%d,state=%d\n",__FUNCTION__,pload->pin,state);
 	key_value[pload->pin]=1;
 	key_flag=1;
 	//唤醒等待队列中的进程
 	wake_up_interruptible((void *)&key_wait_queue);
-
+	return IRQ_RETVAL(IRQ_HANDLED);
 }
 void register_interrupt_fun(void)
 {
@@ -132,7 +134,7 @@ void register_interrupt_fun(void)
 						  (irq_handler_t)key_interrupt_handle,
 						  IRQF_TRIGGER_FALLING,
 						  key_array[i].name,
-						  &key_array[i]);
+						  (void *)&key_array[i]);
 		printk("key%d interrupt register retur = %d\n",i,retur);
 	}
 }

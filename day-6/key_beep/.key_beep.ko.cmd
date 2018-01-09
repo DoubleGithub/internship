@@ -1,0 +1,1 @@
+cmd_/root/Desktop/internship/day-6/key_beep/key_beep.ko := arm-linux-ld -EL -r  -T /usr/src/kernels/linux-3.5/scripts/module-common.lds --build-id  -o /root/Desktop/internship/day-6/key_beep/key_beep.ko /root/Desktop/internship/day-6/key_beep/key_beep.o /root/Desktop/internship/day-6/key_beep/key_beep.mod.o

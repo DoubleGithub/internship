@@ -91,6 +91,9 @@ VIM
 		ctrl + r 相当于ctrl + y
 		ctrl + ] 跳转函数位置  ctrl + t	返回跳转位置----先用ctags建立tag文件
 		ctrl + n ctrl + p 显示补全列表--先用ctags建立tag文件
+		跨文件复制
+			"+yy	复制
+			"+p		粘贴
 	末行模式：
 		i	光标处插入
 		o	在当前行下面插入新行，并进入插入模式
@@ -119,6 +122,7 @@ C语言
 		
 	文件
 		fputc(ch,stdout);//输出到屏幕 
+	volatile变量	变化的频率非常快
 
 内核驱动开发
 	1、内核核心
@@ -191,7 +195,7 @@ C语言
 			操作cdev的函数
 				void cdev_init( struct cdev *, struc t file_operations *);
 				struct cdev *cdev_alloc(void);
-				int cdev_add(st ruct cdev *, dev_t, unsigned);
+				int cdev_add(struct cdev *, dev_t, unsigned);
 				void cdev_del(struct cdev *);
 
 		file_operations 
@@ -254,3 +258,20 @@ C语言
 	软中断
 	硬中断
 	DMA
+	分类
+		按中断来源
+			内部中断
+			外部中断
+		按中断是否可屏蔽
+			可屏蔽中断
+			不可屏蔽中断
+		按中断入口跳转的方法的不同
+			向量中断
+			非向量中断
+		malloc等函数不建议放在中断处理程序中，因为其在内存不足时可能导致休眠
+
+驱动架构
+蜂鸣器驱动
+按键驱动
+再组合
+阻塞和非阻塞

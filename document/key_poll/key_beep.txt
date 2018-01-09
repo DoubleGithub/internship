@@ -1,0 +1,97 @@
+[root@wbyq internship]#rz
+rz ready. Type "sz file ..." to your modem program
+
+开始 zmodem 传输。  按 Ctrl+C 取消。
+  100%     108 KB    9 KB/s 00:00:11       0 Errors
+
+rz 3.48 01-27-98 finished.
+
+
+
+**** UNREGISTERED COPY *****
+Please read the License Agreement in rz.doc
+[root@wbyq internship]#
+[root@wbyq internship]#
+[root@wbyq internship]#
+[root@wbyq internship]#ls
+beep.ko       key1.ko       key_beep.ko   key_hyj
+key.ko        key_app       key_beep_app  key_test
+[root@wbyq internship]#insmod key_beep.ko 
+[ 3074.715000] key_beep_init
+[ 3074.715000] key_beep_cdev_init
+[ 3074.720000] key_beep_major = 250
+[ 3074.720000] key_beep_register_interrupt
+[ 3074.720000] key0 interrupt register retur = 0
+[ 3074.720000] key1 interrupt register retur = 0
+[ 3074.720000] key2 interrupt register retur = 0
+[ 3074.720000] key3 interrupt register retur = 0
+[root@wbyq internship]#
+[root@wbyq internship]#
+[root@wbyq internship]#mknod /dev/key_beep c 250 0
+[root@wbyq internship]#chmod 777 key_beep_app 
+[root@wbyq internship]#./key_beep_app /dev/key_beep 
+[ 3139.685000] key_beep_open
+[ 3139.685000] key_beep_cfg_init
+[ 3139.685000] before modify key_value=0xffff11,beep_value=0x3311
+[ 3139.685000] after modify key_value=0xffff11,beep_value=0x3311
+[ 3139.685000] key_beep_poll
+[ 3142.730000] key_beep_interrupt_handle,pin=0
+[ 3142.730000] key_beep_poll
+[ 3142.730000] key_beep_read
+[ 3142.730000] key_beep_unlocked_ioctl
+[ 3142.730000] beep start
+key0 is pushed down
+[ 3143.730000] key_beep_unlocked_ioctl
+[ 3143.730000] beep stop
+[ 3144.730000] key_beep_read
+[ 3147.870000] key_beep_interrupt_handle,pin=1
+[ 3147.870000] key_beep_read
+[ 3147.870000] key_beep_unlocked_ioctl
+[ 3147.870000] beep start
+key1 is pushed down
+[ 3148.870000] key_beep_unlocked_ioctl
+[ 3148.870000] beep stop
+[ 3149.870000] key_beep_unlocked_ioctl
+[ 3149.870000] beep start
+[ 3150.870000] key_beep_unlocked_ioctl
+[ 3150.870000] beep stop
+[ 3151.870000] key_beep_read
+[ 3153.220000] key_beep_interrupt_handle,pin=2
+[ 3153.225000] key_beep_read
+[ 3153.225000] key_beep_unlocked_ioctl
+[ 3153.225000] beep start
+key2 is pushed down
+[ 3154.225000] key_beep_unlocked_ioctl
+[ 3154.225000] beep stop
+[ 3155.225000] key_beep_unlocked_ioctl
+[ 3155.225000] beep start
+[ 3156.225000] key_beep_unlocked_ioctl
+[ 3156.225000] beep stop
+[ 3157.225000] key_beep_unlocked_ioctl
+[ 3157.225000] beep start
+[ 3157.305000] key_beep_interrupt_handle,pin=3
+[ 3158.225000] key_beep_unlocked_ioctl
+[ 3158.225000] beep stop
+[ 3159.225000] key_beep_read
+[ 3159.225000] beep start
+key3 is pushed down[ 3159.225000] key_beep_unlocked_ioctl
+
+
+[ 3160.225000] key_beep_unlocked_ioctl
+[ 3160.225000] beep stop
+[ 3161.225000] key_beep_unlocked_ioctl
+[ 3161.225000] beep start
+[ 3162.225000] key_beep_unlocked_ioctl
+[ 3162.225000] beep stop
+[ 3163.225000] key_beep_unlocked_ioctl
+[ 3163.225000] beep start
+[ 3164.225000] key_beep_unlocked_ioctl
+[ 3164.225000] beep stop
+[ 3165.225000] key_beep_unlocked_ioctl
+[ 3165.225000] beep start
+[ 3166.225000] key_beep_unlocked_ioctl
+[ 3166.225000] beep stop
+[ 3167.225000] key_beep_read
+^C[ 3177.140000] key_beep_release
+
+[root@wbyq internship]#
