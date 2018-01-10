@@ -6,20 +6,19 @@
 
 int main(int argc,char *argv[])
 {
-	int fd =0;
 	int i=0;
 	int j=0;
-	int retur=0;
-	int fbeep=0;
-	fd_set rdfs;
+	int retur=0,fbeep=0;	//定义两个文件描述符
+	int fd =0;
+	fd_set rdfs;	//定义一个文件描述符集
 	int key_value[4]={0};
-	fd=open(argv[1],O_RDONLY,0x777);
-	fbeep=open(argv[2],O_RDONLY,0x777);
-	assert(fd>=0&&fbeep>=0);
+	fd=open(argv[1],O_RDONLY,0x777);   //O_NONBLOCK非阻塞
+	fbeep=open(argv[2],O_RDONLY,0x777);	//以只读方式打开
+	assert(fd>=0&&fbeep>=0);	//判断是否正确打开设备，否则，退出
 	
-	FD_ZERO(&rdfs);
-	FD_SET(fd,&rdfs);
-	retur = select(fd+1,&rdfs,NULL,NULL,NULL);
+	FD_ZERO(&rdfs);		//清除一个文件描述符集
+	FD_SET(fd,&rdfs);	//将一个文件描述符加入到文件描述符集中
+	retur = select(fd+1,&rdfs,NULL,NULL,NULL);	//调用轮循
 	if(retur<0)
 	{
 		printf("failed in select\n");
@@ -27,7 +26,7 @@ int main(int argc,char *argv[])
 	}
 	while(1)
 	{
-		if(FD_ISSET(fd,&rdfs))
+		if(FD_ISSET(fd,&rdfs))	//判断文件描述符是否被置位
 		{
 			memset(key_value,0,sizeof(key_value));
 			read(fd,key_value,sizeof(key_value));
