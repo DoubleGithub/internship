@@ -7,7 +7,7 @@ ifeq ($(KERNELRELEASE),)
 
     # Assume the source tree is where the running kernel was built
     # You should set KERNELDIR in the environment if it's elsewhere
-    KERNELDIR ?= /usr/src/linux-3.0.1
+    KERNELDIR ?= /usr/src/kernels/linux-3.5
     # The current directory is passed to sub-makes as argument
     PWD := $(shell pwd)
 

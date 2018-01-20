@@ -40,6 +40,7 @@ void key_gpx_conf_init(void)
 {
 	int i =0;
 	unsigned int value=0;
+	printk("%s\n",__FUNCTION__);
 	address=ioremap(0x11000C60,8);
 	value=ioread32(address);
 	printk("before modify value=0x%x\n",value);
@@ -100,11 +101,13 @@ int key_release (struct inode *pnode, struct file *fp)
 static unsigned int key_poll (struct file *fp, struct poll_table_struct *pt)
 {
 	int mask=0;
+	printk("%s\n",__FUNCTION__);
 	/*
 	   poll_wait，如果当前没有文件描述符可用来执行I/O，则内核将使
 	   进程在传递到该系统调用的所有文件描述符对应的等待队列上等待
 	 */
 	poll_wait(fp,&key_wait_queue,pt);
+	printk("%s\n","hahaha");
 	if(key_flag)
 	{
 		mask |= POLLIN|POLLRDNORM;

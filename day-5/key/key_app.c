@@ -18,7 +18,9 @@ int main(int argc,char *argv[])
 	
 	FD_ZERO(&rdfs);		//清除一个文件描述符集
 	FD_SET(fd,&rdfs);	//将一个文件描述符加入到文件描述符集中
+		printf("before select,retur=%d\n",retur);
 	retur = select(fd+1,&rdfs,NULL,NULL,NULL);	//调用轮循
+		printf("after  select,retur =%d\n",retur);
 	if(retur<0)
 	{
 		printf("failed in select\n");
